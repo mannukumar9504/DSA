@@ -1,0 +1,32 @@
+//function to find latest language;
+function findLatestLang(array) {
+    let languages = {}; // to store output language and it's version
+    let finalResult = [];
+
+    if(!array.length) return "list is empty";
+
+    for (let i = 0; i < array.length; i++) {
+
+        let langVersion = array[i].split("-"); // spliting language and version
+
+        if (!Object.keys(languages).includes(langVersion[0])) { // if language not listed then list it
+            languages[langVersion[0]] = langVersion[1];
+        }
+
+        if (langVersion[1] > languages[langVersion[0]]) { // checking if version greater than current then update it
+            languages[langVersion[0]] = langVersion[1];
+        }
+    }
+
+    for (let item of Object.entries(languages)) {  // format to array form
+        finalResult.push(`${item[0]}-${item[1]}`);
+
+    }
+
+    return finalResult;
+}
+
+let array = ["php-1", "php-3", "php-2", "node-1", "node-3", "java-4", "java-1"]; // input 
+
+console.log("output==>", findLatestLang(array));
+
